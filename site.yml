@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Set up
+      ansible.builtin.import_role:
+        name: deploy-registry

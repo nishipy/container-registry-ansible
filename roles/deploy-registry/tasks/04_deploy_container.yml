@@ -1,0 +1,25 @@
+---
+- name: Run registry container
+  containers.podman.podman_container:
+    name: myregistry
+    image: docker.io/library/registry:2
+    ports:
+      - "5000:5000"
+    volume:
+      - /opt/registry/data:/var/lib/registry:z
+      - /opt/registry/auth:/auth:z
+      - /opt/registry/certs:/certs:z
+    env:
+      REGISTRY_AUTH: htpasswd
+      REGISTRY_AUTH_HTPASSWD_REALM: "Registry Realm"
+      REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+      REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+
+- name: Try to access registry container
+  ansible.builtin.uri:
+    url: https://localhost:5000/v2/
+    method: GET
+    url_username: user
+    url_password: redhat
+    validate_certs: false

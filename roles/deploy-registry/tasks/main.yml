@@ -1,0 +1,12 @@
+---
+- name: Set up cert
+  import_tasks: 01_setup_cert.yml
+
+- name: Set up user
+  import_tasks: 02_setup_user.yml
+
+- name: Set up port
+  import_tasks: 03_setup_port.yml
+
+- name: Deploy registry container
+  import_tasks: 04_deploy_container.yml

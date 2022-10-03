@@ -1,0 +1,7 @@
+---
+- name: Add a user to a password file
+  community.general.htpasswd:
+    path: /opt/registry/auth/htpasswd
+    name: user
+    password: redhat
+    crypt_scheme: bcrypt

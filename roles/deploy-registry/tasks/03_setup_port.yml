@@ -1,0 +1,15 @@
+---
+- name: Populate service facts
+  service_facts:
+  register: services_facts
+
+- name: Open port 5000/tcp
+  ansible.posix.firewalld:
+    port: 5000/tcp
+    permanent: yes
+    state: enabled
+  vars:
+    # https://access.redhat.com/solutions/6220671
+    ansible_python_interpreter: /usr/bin/python3
+  when: services_facts.ansible_facts.services["firewalld.service"] is defined
+    and services_facts.ansible_facts.services["firewalld.service"].state == "running"
