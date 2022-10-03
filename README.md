@@ -1,5 +1,5 @@
-# deploy-container-registry role for Ansible
-This repo hosts ansible role for container registry. It will be deployed by using podman.
+# container-registry-ansible
+This repo hosts Ansible role for container registry. It will be deployed as a podman container.
 You can access the registry as follows:
 ```
 $ curl -u user:<PASSWD> -k https://localhost:5000/v2/
